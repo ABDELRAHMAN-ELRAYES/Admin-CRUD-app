@@ -3,9 +3,12 @@ html
     header
         meta(charset='UTF-8')
         meta(name='viewport' content='width=device-width, initial-scale=1.0')
-        title Login
+        title #{title}
         link(rel='stylesheet' href='/css/home.css')
 
     body
-        block content
-            p here is the home page 
+        .container
+            block content
+                form(action='/login' method='get')
+                    button.login-btn.btn(type='submit') Login
+                ion-icon(name="mail-outline")

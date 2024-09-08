@@ -1,0 +1,12 @@
+extends admin 
+block user 
+    .user
+         img(src=`/img/${user.photo}`)
+         p #{user.name}
+         p #{user.email}
+         input(type="text" value=`${user.email}` style='display:none')
+         .btns
+             button.del-btn(type='submit')
+                 img(src="/img/del-icon.png", alt="")
+             button.del-btn(type='submit')
+                 img(src="/img/circle.png", alt="")

@@ -45,7 +45,8 @@ export const login = catchAsync(
     if (!req.body.email || !req.body.password) {
       return next(new ErrorType(404, 'Email or password is not found!!.'));
     }
-    console.log(req.body);
+    // console.log(req.body);
+    const users = await User.find({ role: { $ne: 'admin' } });
     const user = await User.findOne({ email: req.body.email }).select(
       '+password'
     );
@@ -66,10 +67,17 @@ export const login = catchAsync(
     }
 
     sendToken(user, res);
-    res.status(200).json({
-      status: 'success',
-      message: 'You logged in successfully!.',
-    });
+    if (user.role === 'admin') {
+      res.status(200).render('admin', {
+        title: 'admin | dashboard',
+        users,
+      });
+    } else {
+      res.status(200).json({
+        status: 'success',
+        message: 'you are signed in successfully',
+      });
+    }
   }
 );
 export const protect = catchAsync(
