@@ -32,7 +32,7 @@ export const renderSearch = catchAsync(
     res.status(200).render('search', {
       title: 'admin | dashboard',
       user,
-      users,
+      users
     });
   }
 );
@@ -48,6 +48,10 @@ export const renderCreate = catchAsync(
     res.status(200).render('admin', {
       title: 'admin | dashboard',
       users,
+      msg: {
+        content: 'Employee is created successfully!.',
+        type: 'created-msg',
+      },
     });
   }
 );
@@ -58,6 +62,10 @@ export const renderDelete = catchAsync(
     res.status(200).render('admin', {
       title: 'admin | dashboard',
       users,
+      msg: {
+        content: 'Employee is deleted successfully!.',
+        type: 'deleted-msg',
+      },
     });
   }
 );
@@ -98,6 +106,10 @@ export const handleUpdate = catchAsync(
     res.status(200).render('admin', {
       title: 'admin | dashboard',
       users,
+      msg: {
+        content: 'Employee is updated successfully!.',
+        type: 'updated-msg',
+      },
     });
   }
 );

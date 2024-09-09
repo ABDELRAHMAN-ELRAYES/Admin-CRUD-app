@@ -163,3 +163,28 @@ label {
   width: 61rem;
   margin-left: 9rem;
 }
+.message-content {
+  width: 100%;
+  padding-left: 9rem;
+}
+.msg {
+  height: 3rem;
+  width: 33rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--con-color);
+}
+.deleted-msg {
+  color: red;
+}
+.updated-msg,
+.created-msg {
+  color: rgb(1, 146, 1);
+}
+.cancel-btn {
+  font-weight: 1000;
+  cursor: pointer;
+}

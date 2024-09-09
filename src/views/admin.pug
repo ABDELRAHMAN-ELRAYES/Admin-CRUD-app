@@ -5,6 +5,7 @@ html
         meta(name='viewport' content='width=device-width, initial-scale=1.0')
         title #{title}
         link(rel='stylesheet' href='/css/admin.css')
+        script(src="/js/admin.js" defer) 
 
     body
         .container
@@ -60,3 +61,8 @@ html
                                     .input-dev.passConfirm-input
                                         input.pas(type="password" name="confirmPassword" placeholder="Confirm Employee password")
                                     button.btn(type='submit') Create Employee
+                    if msg
+                        .message-content 
+                            .msg(class=`${msg.type}`)
+                                p #{msg.content}
+                                p.cancel-btn X
