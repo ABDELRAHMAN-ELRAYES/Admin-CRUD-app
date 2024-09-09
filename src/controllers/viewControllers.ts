@@ -27,7 +27,6 @@ export const renderSignup = catchAsync(
 );
 export const renderSearch = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body.search);
     const user = await User.findOne({ email: req.body.search });
     const users = await User.find({ role: { $ne: 'admin' } });
     res.status(200).render('search', {
@@ -45,6 +44,56 @@ export const renderCreate = catchAsync(
       password: req.body.password,
       passwordConfirm: req.body.confirmPassword,
     });
+    const users = await User.find({ role: { $ne: 'admin' } });
+    res.status(200).render('admin', {
+      title: 'admin | dashboard',
+      users,
+    });
+  }
+);
+export const renderDelete = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await User.findByIdAndDelete(req.params.id);
+    const users = await User.find({ role: { $ne: 'admin' } });
+    res.status(200).render('admin', {
+      title: 'admin | dashboard',
+      users,
+    });
+  }
+);
+export const renderUpdate = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const user = await User.findById(req.params.id);
+    res.status(200).render('update', {
+      title: 'admin | dashboard',
+      user,
+    });
+  }
+);
+export const handleUpdate = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const actualUser = await User.findById(req.params.id);
+
+    if (
+      actualUser?.name !== req.body.name &&
+      actualUser?.email === req.body.email
+    ) {
+      const user = await User.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+      });
+    } else if (
+      actualUser?.name === req.body.name &&
+      actualUser?.email !== req.body.email
+    ) {
+      const user = await User.findByIdAndUpdate(req.params.id, {
+        email: req.body.email,
+      });
+    } else {
+      const user = await User.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        email: req.body.email,
+      });
+    }
     const users = await User.find({ role: { $ne: 'admin' } });
     res.status(200).render('admin', {
       title: 'admin | dashboard',

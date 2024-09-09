@@ -9,7 +9,7 @@ html
     body
         .container
             nav
-                form(action="" method='') 
+                form(action="/login" method='get') 
                     .nav-content
                         .nav-element
                             p All Employees
@@ -41,10 +41,12 @@ html
                                         p #{user.email}
                                         input(type="text" value=`${user.email}` style='display:none')
                                         .btns
-                                            button.del-btn(type='submit')
-                                                img(src="/img/del-icon.png", alt="")
-                                            button.del-btn(type='submit')
-                                                img(src="/img/circle.png", alt="")
+                                            form(action=`/edit-user/${user._id}` method='get')
+                                                button.del-btn(type='submit')
+                                                    img(src="/img/circle.png", alt="")
+                                            form(action=`/user/${user._id}` method='post') 
+                                                button.del-btn(type='submit')
+                                                    img(src="/img/del-icon.png", alt="")
                         .create-user
                             h1.sec-title Create Employee
                             .create-user-content 

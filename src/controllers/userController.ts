@@ -13,6 +13,7 @@ export const getAllUsers = catchAsync(
     });
   }
 );
-export const renderHome = (req: Request, res: Response, next: NextFunction) => {
+/* export const renderHome = (req: Request, res: Response, next: NextFunction) => {
   res.sendFile(path.join(__dirname + `/../templates/login.html`));
 };
+ */

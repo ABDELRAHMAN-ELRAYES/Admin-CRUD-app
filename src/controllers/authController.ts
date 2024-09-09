@@ -45,7 +45,6 @@ export const login = catchAsync(
     if (!req.body.email || !req.body.password) {
       return next(new ErrorType(404, 'Email or password is not found!!.'));
     }
-    // console.log(req.body);
     const users = await User.find({ role: { $ne: 'admin' } });
     const user = await User.findOne({ email: req.body.email }).select(
       '+password'
